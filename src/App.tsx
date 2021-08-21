@@ -1,16 +1,33 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import List from "./components/List";
+import AddToList from "./components/AddToList";
+
+export interface IState {
+  people: {
+    name: string;
+    url: string;
+    age: number;
+    note?: string;
+  }[];
+}
 
 function App() {
-  const [people, setPeople] = useState([
-    { name: "Lebron James", url: "", age: 20, notes: "Hi" },
-    { name: "Kobe Bryant", url: "", age: 36 },
+  const [people, setPeople] = useState<IState["people"]>([
+    {
+      name: "Lebron James",
+      url: "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+      age: 25,
+      note: "asdfasdf",
+    },
   ]);
 
   return (
     <div className="App">
       <h1>People invited to my party</h1>
+      <List people={people} />
+      <AddToList people={people} setPeople={setPeople} />
     </div>
   );
 }
